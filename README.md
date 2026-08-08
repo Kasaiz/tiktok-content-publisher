@@ -46,7 +46,7 @@ Upload Draft / Publish
 - TikTok Content Posting API
 - OAuth 2.0
 - Requests
-- `http.server` (built-in Python) for the local OAuth callback receiver
+- Flask (OAuth callback)
 
 ---
 
@@ -74,16 +74,8 @@ Create a `.env` file.
 ```env
 CLIENT_KEY=YOUR_CLIENT_KEY
 CLIENT_SECRET=YOUR_CLIENT_SECRET
-REDIRECT_URI=https://kasaiz.github.io/tiktok-app-pages/callback.html
+REDIRECT_URI=http://localhost:8080/callback
 ```
-
-> **Why not `http://localhost:8080/callback`?** TikTok's Login Kit only accepts a
-> **static `https` redirect URI** registered in the Developer Portal — loopback
-> addresses like `127.0.0.1`/`localhost` are rejected. `callback.html` in this repo
-> is that registered `https` redirect URI: it's a static page that reads the
-> `code`/`state` TikTok appends to the URL and immediately forwards the browser to
-> `http://127.0.0.1:8080/callback` on the user's own machine, where the local Python
-> app's OAuth server is listening. See `tiktok_dub_pipeline/tiktok_auth.py`.
 
 ---
 
